@@ -5,6 +5,7 @@ import io.playdata.jpa.repository.ShoeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,7 @@ public class ShoeService {
 
         counts.forEach(row -> {
             String brand = (String) row[0];
-            Long count = (Long) row[1];
+            BigInteger count = (BigInteger) row[1];
             result.put(brand, count.intValue());
         });
 
