@@ -4,10 +4,9 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Shoe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
