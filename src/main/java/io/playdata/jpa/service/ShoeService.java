@@ -5,7 +5,9 @@ import io.playdata.jpa.repository.ShoeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -27,5 +29,30 @@ public class ShoeService {
 
     public void deleteById(Long id) {
         shoeRepository.deleteById(id);
+    }
+
+    public List<Shoe> findByName(String name) {
+        return shoeRepository.findByNameContaining(name);
+    }
+
+    public List<Shoe> findByPriceRange(int minPrice, int maxPrice) {
+        return shoeRepository.findByPriceBetween(minPrice, maxPrice);
+    }
+
+    public Map<String, Integer> countByBrand() {
+        List<Object[]> counts = shoeRepository.countByBrand();
+        Map<String, Integer> result = new HashMap<>();
+
+        counts.forEach(row -> {
+            String brand = (String) row[0];
+            Long count = (Long) row[1];
+            result.put(brand, count.intValue());
+        });
+
+        return result;
+    }
+
+    public Shoe findMostExpensive() {
+        return shoeRepository.findMostExpensive();
     }
 }
